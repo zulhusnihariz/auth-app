@@ -1,0 +1,35 @@
+const Joi = require("joi");
+
+module.exports = {
+  register(req, res, next) {
+    const schema = Joi.object({
+      email: Joi.string().email(),
+      username: Joi.string(),
+      password: Joi.string().regex(new RegExp("^[a-zA-Z0-9]{8,32}$")),
+    });
+
+    const { error, value } = schema.validate(req.body);
+
+    if (error) {
+      switch (error.details[0].context.key) {
+        case "email":
+          res
+            .status(400)
+            .send({ error: "You must provide a valid email address" });
+          break;
+
+        case "password":
+          res.status(400).send({
+            error:
+              "Password must only contain: <br> 1. upper/lowercase or numbers <br> 2. minimum of 8 characters ",
+          });
+
+          break;
+
+        default:
+      }
+    } else {
+      next();
+    }
+  },
+};

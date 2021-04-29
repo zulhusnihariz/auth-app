@@ -4,9 +4,12 @@
       <label for="">Username</label>
       <input type="text" v-model="username" autofocus required />
       <label for="">Email</label>
+
       <input type="email" v-model="email" required />
       <label for="">Password</label>
       <input type="password" v-model="password" required />
+      <div class="error" v-html="error" />
+
       <button @click="register">Sign Up</button>
 
       <div class="create-account">
@@ -26,17 +29,21 @@ export default {
       username: "",
       password: "",
       email: "",
+      error: null,
     };
   },
   methods: {
     async register() {
       console.log("register button was clicked");
-      const response = await axios.post("http://localhost:8080/register", {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      });
-      console.log(response.data);
+      try {
+        const response = await axios.post("http://localhost:8080/register", {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        });
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
     },
   },
 };
@@ -108,5 +115,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
 }
 </style>
