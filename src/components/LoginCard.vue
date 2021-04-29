@@ -1,8 +1,8 @@
 <template>
   <div class="login-card">
     <div class="container">
-      <label for="">Username or Email</label>
-      <input type="text" required />
+      <label for="">Email</label>
+      <input type="email" required />
       <label for="">Password</label>
       <input type="password" required />
       <button>Sign In</button>

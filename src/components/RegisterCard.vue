@@ -2,11 +2,11 @@
   <div class="register-card">
     <div class="container">
       <label for="">Username</label>
-      <input type="text" v-model="username" required />
-      <label for="">Password</label>
-      <input type="password" v-model="password" required />
+      <input type="text" v-model="username" autofocus required />
       <label for="">Email</label>
       <input type="email" v-model="email" required />
+      <label for="">Password</label>
+      <input type="password" v-model="password" required />
       <button @click="registerUser">Sign Up</button>
 
       <div class="create-account">
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "RegisterCard",
   data() {
@@ -29,9 +30,12 @@ export default {
   },
   methods: {
     registerUser() {
+      console.log("clicked");
+
       const data = [
         { username: this.username, password: this.password, email: this.email },
       ];
+
       console.log(data);
     },
   },

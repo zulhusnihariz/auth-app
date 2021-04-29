@@ -6,6 +6,7 @@
 </template>
 <script>
 import RegisterCard from "../components/RegisterCard";
+import axios from "axios";
 export default {
   name: "Register",
   components: { RegisterCard },
