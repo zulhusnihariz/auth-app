@@ -3,7 +3,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const config = require("../config/config");
 
-const sequelize = new Sequelize("tabtracker", "root", "", {
+const sequelize = new Sequelize("authapp", "root", "", {
   dialect: "sqlite",
   host: "localhost",
 });

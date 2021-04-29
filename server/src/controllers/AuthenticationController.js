@@ -37,10 +37,12 @@ module.exports = {
         });
       }
 
-      const isPasswordValid = password === user.password;
+      const isPasswordValid = await user.comparePassword(password);
+      console.log(`this is a password checker${isPasswordValid}`);
+
       if (!isPasswordValid) {
-        res.status(403).send({
-          error: "The login information was incorrect",
+        return res.status(403).send({
+          error: "Incorrect Password",
         });
       }
       userJson = user.toJSON();
