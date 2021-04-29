@@ -1,4 +1,13 @@
 const { User } = require("../models");
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+
+function jwtSignUser(user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7;
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK,
+  });
+}
 
 module.exports = {
   // create new data in database
@@ -34,8 +43,9 @@ module.exports = {
           error: "The login information was incorrect",
         });
       }
-
-      res.send({ user: user.toJSON() });
+      userJson = user.toJSON();
+      console.log(userJson);
+      res.send({ user: userJson, token: jwtSignUser(userJson) });
     } catch (err) {
       res.status(500).send({
         error: "An error has occured trying to log in",
