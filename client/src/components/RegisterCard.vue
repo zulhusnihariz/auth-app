@@ -7,7 +7,7 @@
       <input type="email" v-model="email" required />
       <label for="">Password</label>
       <input type="password" v-model="password" required />
-      <button @click="registerUser">Sign Up</button>
+      <button @click="register">Sign Up</button>
 
       <div class="create-account">
         Already have an account?
@@ -29,14 +29,14 @@ export default {
     };
   },
   methods: {
-    registerUser() {
-      console.log("clicked");
-
-      const data = [
-        { username: this.username, password: this.password, email: this.email },
-      ];
-
-      console.log(data);
+    async register() {
+      console.log("register button was clicked");
+      const response = await axios.post("http://localhost:8080/register", {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      });
+      console.log(response.data);
     },
   },
 };
