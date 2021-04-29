@@ -2,22 +2,46 @@
   <div class="login-card">
     <div class="container">
       <label for="">Email</label>
-      <input type="email" required />
+      <input type="email" v-model="email" autofocus required />
       <label for="">Password</label>
-      <input type="password" required />
-      <button>Sign In</button>
+      <input type="password" v-model="password" required />
+      <div class="error" v-html="error" />
+
+      <button @click="login">Sign In</button>
 
       <div class="create-account">
         New to this site?
-        <router-link :to="{ name: 'Register' }">Create an account</router-link>.
+        <router-link :to="{ name: 'Login' }">Sign Up</router-link>.
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AuthenticationService from "../services/AuthenticationService";
 export default {
   name: "LoginCard",
+  data() {
+    return {
+      username: "",
+      password: "",
+      email: "",
+      error: null,
+    };
+  },
+  methods: {
+    async login() {
+      console.log("login button was clicked");
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password,
+        });
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
+    },
+  },
 };
 </script>
 

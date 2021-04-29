@@ -1,6 +1,7 @@
 const { User } = require("../models");
 
 module.exports = {
+  // create new data in database
   async register(req, res) {
     try {
       const user = await User.create(req.body);
@@ -8,6 +9,36 @@ module.exports = {
     } catch (err) {
       res.status(400).send({
         error: "This email account is already in use.",
+      });
+    }
+  },
+
+  // find data in database that match email given
+  async login(req, res) {
+    try {
+      const { email, password } = req.body;
+      const user = await User.findOne({
+        where: {
+          email: email,
+        },
+      });
+      if (!user) {
+        req.status(403).send({
+          error: "The login information was incorrect",
+        });
+      }
+
+      const isPasswordValid = password === user.password;
+      if (!isPasswordValid) {
+        res.status(403).send({
+          error: "The login information was incorrect",
+        });
+      }
+
+      res.send({ user: user.toJSON() });
+    } catch (err) {
+      res.status(500).send({
+        error: "An error has occured trying to log in",
       });
     }
   },

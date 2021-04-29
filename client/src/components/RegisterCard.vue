@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import AuthenticationService from "../services/AuthenticationService";
 export default {
   name: "RegisterCard",
   data() {
@@ -36,7 +36,7 @@ export default {
     async register() {
       console.log("register button was clicked");
       try {
-        const response = await axios.post("http://localhost:8080/register", {
+        const response = await AuthenticationService.register({
           username: this.username,
           email: this.email,
           password: this.password,
@@ -52,7 +52,7 @@ export default {
 <style>
 .register-card {
   width: 550px;
-  height: 560px;
+  height: 430px;
   background-color: hsl(235, 24%, 19%);
   margin: auto;
 }
