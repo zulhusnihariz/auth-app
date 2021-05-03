@@ -1,10 +1,9 @@
 <template>
-  <div class="register-card">
+  <div class="card">
     <div class="container">
       <label for="">Username</label>
       <input type="text" v-model="username" autofocus required />
       <label for="">Email</label>
-
       <input type="email" v-model="email" required />
       <label for="">Password</label>
       <input type="password" v-model="password" required />
@@ -51,57 +50,7 @@ export default {
 };
 </script>
 
-<style>
-.register-card {
-  width: 550px;
-  height: 430px;
-  background-color: hsl(235, 24%, 19%);
-  margin: auto;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 300px;
-  align-content: center;
-  margin: auto;
-}
-
-label {
-  align-self: start;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-label:first-child {
-  margin-top: 25px;
-}
-
-input {
-  border: none;
-  outline: none;
-  margin-bottom: 25px;
-  width: 310px;
-  height: 30px;
-  margin-left: 25px;
-}
-
-button {
-  border: none;
-  margin-top: 10px;
-  margin-left: 25px;
-  width: 320px;
-  height: 35px;
-  background-color: rgba(35, 134, 54);
-  color: white;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: rgba(35, 134, 54, 0.7);
-}
-
+<style scoped>
 .create-account {
   margin-top: 25px;
   margin-left: 25px;

@@ -1,19 +1,35 @@
 <template>
   <div id="nav">
-    <router-link :to="{ name: 'Home' }">Home</router-link> |
-    <router-link :to="{ name: 'Login' }" v-if="!$store.state.isUserLogged"
-      >Login</router-link
-    >
-    |
-    <router-link :to="{ name: 'Register' }" v-if="!$store.state.isUserLogged"
-      >Register</router-link
-    >
-    <router-link
-      :to="{ name: 'Login' }"
-      v-if="$store.state.isUserLogged"
-      @click="logOut"
-      >Logout</router-link
-    >
+    <router-link id="home" :to="{ name: 'Home' }">Home</router-link>
+    <ul>
+      <li :class="{ hidden: !$store.state.isUserLogged }">
+        <router-link
+          :to="{ name: 'UserManagement' }"
+          v-show="$store.state.isUserLogged"
+          >Account</router-link
+        >
+      </li>
+      <li :class="{ hidden: !$store.state.isUserLogged }">
+        <router-link
+          :to="{ name: 'Login' }"
+          v-show="$store.state.isUserLogged"
+          @click="logOut"
+          >Logout</router-link
+        >
+      </li>
+      <li :class="{ hidden: $store.state.isUserLogged }">
+        <router-link :to="{ name: 'Login' }" v-show="!$store.state.isUserLogged"
+          >Login</router-link
+        >
+      </li>
+      <li :class="{ hidden: $store.state.isUserLogged }">
+        <router-link
+          :to="{ name: 'Register' }"
+          v-show="!$store.state.isUserLogged"
+          >Register</router-link
+        >
+      </li>
+    </ul>
   </div>
   <router-view />
 </template>
@@ -34,6 +50,64 @@ export default {
 body {
   background-color: hsl(235, 21%, 11%);
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  margin-top: 25px;
+  border: 1px white solid;
+  padding: 15px 0;
+}
+
+li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0 15px;
+}
+
+label {
+  align-self: start;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+label:first-child {
+  margin-top: 25px;
+}
+
+input {
+  border: none;
+  outline: none;
+  margin-bottom: 25px;
+  width: 310px;
+  height: 30px;
+  margin-left: 25px;
+}
+
+button {
+  border: none;
+  margin-top: 10px;
+  margin-left: 25px;
+  width: 320px;
+  height: 35px;
+  background-color: rgba(35, 134, 54);
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: rgba(35, 134, 54, 0.7);
+}
+
+a {
+  text-decoration: none;
+  color: #5079c9;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 #app {
   font-family: "Josefin Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -50,9 +124,35 @@ body {
   font-weight: bold;
   color: white;
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 
 #nav a.router-link-exact-active {
   color: #5079c9;
+}
+
+.card {
+  display: flex;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  background-color: hsl(235, 24%, 19%);
+  max-width: 500px;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  align-content: center;
+  margin: auto;
+}
+
+.hidden {
+  margin: 0;
+  width: 0;
 }
 </style>

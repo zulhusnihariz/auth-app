@@ -54,4 +54,16 @@ module.exports = {
       });
     }
   },
+
+  // change password
+  // async change(req, res) {
+  //   try {
+  //     const { email, password } = req.body;
+  //     const user = await User.findOne({
+  //       where: {
+  //         email: email,
+  //       },
+  //     });
+  //   }
+  // },
 };

@@ -1,15 +1,9 @@
 <template>
   <div class="home">
     <h1>Home page</h1>
-    <span>Login status: {{ $store.state.isUserLogged }}</span>
-    <br />
-    <span>Token:</span>
-    <p>{{ $store.state.token }}</p>
-    <br />
-    <span>User:</span>
-    <p>{{ $store.state.user }}</p>
-
-    <p></p>
+    <p v-if="$store.state.isUserLogged">
+      Welcome, {{ $store.state.user.username }} !
+    </p>
   </div>
 </template>
 
@@ -21,7 +15,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
   display: flex;
   align-items: center;
