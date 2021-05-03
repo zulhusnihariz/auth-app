@@ -1,15 +1,20 @@
 <template>
   <div class="card">
     <div class="container">
-      <label for="">Username</label>
-      <input type="text" v-model="username" autofocus required />
-      <label for="">Email</label>
-      <input type="email" v-model="email" required />
-      <label for="">Password</label>
-      <input type="password" v-model="password" required />
-      <div class="error" v-html="error" />
+      <form @submit.prevent="register">
+        <label for="">Username</label>
+        <input type="text" v-model="username" autofocus required />
 
-      <button @click="register">Sign Up</button>
+        <label for="">Email</label>
+        <input type="email" v-model="email" required />
+
+        <label for="">Password</label>
+        <input type="password" v-model="password" required />
+
+        <div class="error" v-html="error" />
+
+        <button type="submit">Sign Up</button>
+      </form>
 
       <div class="create-account">
         Already have an account?
@@ -49,27 +54,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.create-account {
-  margin-top: 25px;
-  margin-left: 25px;
-  border: solid 1px white;
-  padding: 10px;
-  width: 300px;
-}
-
-a {
-  text-decoration: none;
-  color: #5079c9;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.error {
-  color: red;
-  font-size: 0.8rem;
-}
-</style>

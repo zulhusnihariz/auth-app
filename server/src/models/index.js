@@ -6,6 +6,7 @@ const config = require("../config/config");
 const sequelize = new Sequelize("authapp", "root", "", {
   dialect: "sqlite",
   host: "localhost",
+  storage: path.join(__dirname, "..", "database_test.sqlite"),
 });
 
 try {

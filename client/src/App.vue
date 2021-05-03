@@ -50,6 +50,29 @@ export default {
 body {
   background-color: hsl(235, 21%, 11%);
 }
+#app {
+  font-family: "Josefin Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: white;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav a.router-link-exact-active {
+  color: #5079c9;
+}
 
 ul {
   margin: 0;
@@ -81,7 +104,6 @@ input {
   margin-bottom: 25px;
   width: 310px;
   height: 30px;
-  margin-left: 25px;
 }
 
 button {
@@ -108,30 +130,6 @@ a:hover {
   text-decoration: underline;
 }
 
-#app {
-  font-family: "Josefin Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  margin: 0;
-  padding: 0;
-}
-
-#nav a.router-link-exact-active {
-  color: #5079c9;
-}
-
 .card {
   display: flex;
   width: auto;
@@ -139,6 +137,7 @@ a:hover {
   padding: 15px;
   background-color: hsl(235, 24%, 19%);
   max-width: 500px;
+
   margin: auto;
 }
 
@@ -154,5 +153,17 @@ a:hover {
 .hidden {
   margin: 0;
   width: 0;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.create-account {
+  margin-top: 25px;
+  border: solid 1px white;
+  padding: 10px;
+  width: 300px;
 }
 </style>

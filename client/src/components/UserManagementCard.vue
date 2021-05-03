@@ -2,27 +2,37 @@
   <div class="card">
     <div class="container">
       <h2>Change Password</h2>
-      <label for="">Email</label>
-      <input
-        class="disabled-email"
-        type="email"
-        v-model="$store.state.user.email"
-        disabled
-        required
-      />
-      <label for="">Old Password</label>
-      <input type="password" required />
-      <label for="">New Password</label>
-      <input type="password" required />
-      <label for="">Confirm New Password</label>
-      <input type="password" required />
-      <div class="error" v-html="error" />
-      <button @click="change">Change Password</button>
+      <br />
+      <form @submit.prevent="change">
+        <label for="">Email</label>
+        <input
+          class="disabled-email"
+          type="email"
+          v-model="$store.state.user.email"
+          disabled
+          required
+        />
+        <label for="">Old Password</label>
+        <input type="password" v-model="password" required />
+        <label for="">New Password</label>
+        <input type="password" v-model="newPassword" required />
+        <label for="">Confirm New Password</label>
+        <input type="password" v-model="confirmPassword" required />
+
+        <div class="error" v-html="error" />
+        <div class="notification" v-if="pwchanged">
+          Password has been changed successfully
+        </div>
+
+        <button type="submit">Change Password</button>
+      </form>
     </div>
     <div id="delete-container" class="container">
       <h2>Delete Account</h2>
       <br />
       <button class="delete" @click="deleteUser">Delete Account</button>
+
+      <p>{{ $store.state.user }}</p>
     </div>
   </div>
 </template>
@@ -33,25 +43,47 @@ export default {
   name: "UserManagementCard",
   data() {
     return {
-      username: "",
       password: "",
-      email: "",
+      newPassword: "",
+      confirmPassword: "",
+      pwchanged: false,
       error: null,
     };
   },
   methods: {
-    async login() {
-      console.log("login button was clicked");
+    async change() {
+      this.pwchanged = false;
+
+      console.log("change button was clicked");
       try {
-        const response = await AuthenticationService.login({
-          email: this.email,
+        const response = await AuthenticationService.change({
+          email: this.$store.state.user.email,
           password: this.password,
+          newPassword: this.newPassword,
+          confirmPassword: this.confirmPassword,
         });
 
-        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
+        this.error = "";
+        this.pwchanged = true;
+
+        console.log(response.data.user);
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
+    },
+
+    async delete() {
+      try {
+        const response = await AuthenticationService.delete({
+          email: this.$store.state.user.email,
+        });
+
         this.$store.dispatch("setUser", response.data.user);
 
-        this.$router.push("/");
+        this.$router.push("/login");
+
+        console.log(response.data.user);
       } catch (error) {
         this.error = error.response.data.error;
       }
@@ -72,20 +104,26 @@ h2 {
   padding: 0;
 }
 
-.card,
-.container {
-  max-width: 1200px;
-}
-
 button {
   padding: 0;
   margin: 0;
 }
 
-#delete-container {
-  justify-content: start;
+form {
   margin: 0;
-  margin-left: 25px;
+  padding: 0;
+}
+
+.card {
+  align-items: flex-start;
+  width: 1020px;
+  padding: 25px;
+  max-width: 1020px;
+}
+
+#delete-container {
+  align-self: flex-start;
+  margin-top: 0;
 }
 
 .delete {
@@ -101,5 +139,12 @@ button {
 
 .disabled-email {
   color: rgba(0, 0, 0, 0.507);
+}
+
+.notification {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  color: rgb(26, 212, 26);
 }
 </style>

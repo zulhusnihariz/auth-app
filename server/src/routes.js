@@ -9,4 +9,10 @@ module.exports = (app) => {
   );
 
   app.post("/login", AuthenticationController.login);
+
+  app.post(
+    "/account",
+    AuthenticationControllerPolicy.change,
+    AuthenticationController.change
+  );
 };

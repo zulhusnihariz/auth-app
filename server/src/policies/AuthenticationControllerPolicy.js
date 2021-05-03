@@ -32,4 +32,31 @@ module.exports = {
       next();
     }
   },
+
+  change(req, res, next) {
+    const schema = Joi.object({
+      email: Joi.string().email(),
+      password: Joi.string().regex(new RegExp("^[a-zA-Z0-9]{8,32}$")),
+      newPassword: Joi.string().regex(new RegExp("^[a-zA-Z0-9]{8,32}$")),
+      confirmPassword: Joi.string().regex(new RegExp("^[a-zA-Z0-9]{8,32}$")),
+    });
+
+    const { error, value } = schema.validate(req.body);
+
+    if (error) {
+      switch (error.details[0].context.key) {
+        case "newPassword":
+          res.status(400).send({
+            error:
+              "Password must only contain: <br> 1. upper/lowercase or numbers <br> 2. minimum of 8 characters",
+          });
+
+          break;
+
+        default:
+      }
+    } else {
+      next();
+    }
+  },
 };

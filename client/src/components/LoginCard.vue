@@ -1,14 +1,17 @@
 <template>
   <div class="card">
     <div class="container">
-      <label for="">Email</label>
-      <input type="email" v-model="email" autofocus required />
-      <label for="">Password</label>
-      <input type="password" v-model="password" required />
-      <div class="error" v-html="error" />
+      <form @submit.prevent="login">
+        <label for="">Email</label>
+        <input type="email" v-model="email" autofocus required />
 
-      <button @click="login">Sign In</button>
+        <label for="">Password</label>
+        <input type="password" v-model="password" required />
 
+        <div class="error" v-html="error" />
+
+        <button type="submit">Sign In</button>
+      </form>
       <div class="create-account">
         New to this site?
         <router-link :to="{ name: 'Register' }">Sign Up</router-link>.
@@ -49,13 +52,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.create-account {
-  margin-top: 25px;
-  margin-left: 25px;
-  border: solid 1px white;
-  padding: 10px;
-  width: 300px;
-}
-</style>
