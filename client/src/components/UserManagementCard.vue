@@ -1,5 +1,12 @@
 <template>
   <div class="card">
+    <div class="link-container">
+      <ul class="account-setting">
+        <li>Change Password</li>
+        <li>Delete Account</li>
+      </ul>
+    </div>
+
     <div class="container">
       <h2>Change Password</h2>
       <br />
@@ -27,13 +34,13 @@
         <button type="submit">Change Password</button>
       </form>
     </div>
-    <div id="delete-container" class="container">
+    <!-- <div id="delete-container" class="container">
       <h2>Delete Account</h2>
       <br />
       <button class="delete" @click="deleteUser">Delete Account</button>
 
       <p>{{ $store.state.user }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -115,8 +122,8 @@ form {
 }
 
 .card {
+  position: relative;
   align-items: flex-start;
-  width: 1020px;
   padding: 25px;
   max-width: 1020px;
 }
@@ -146,5 +153,19 @@ form {
   margin-bottom: 10px;
   padding: 0;
   color: rgb(26, 212, 26);
+}
+
+.account-setting {
+  position: absolute;
+  display: block;
+  transform: translate(-200px, -48px);
+  text-align: left;
+}
+
+.account-setting li {
+  display: block;
+}
+.account-setting li:not(:last-child) {
+  margin-bottom: 10px;
 }
 </style>

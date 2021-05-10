@@ -1,6 +1,52 @@
 <template>
-  <router-view />
+  <div id="nav">
+    <router-link id="home" :to="{ name: 'Home' }">Home</router-link>
+    <ul>
+      <li
+        class="account-dropdown"
+        :class="{ hidden: !$store.state.isUserLogged }"
+      >
+        <router-link
+          :to="{ name: 'UserManagement' }"
+          v-show="$store.state.isUserLogged"
+          >Account</router-link
+        >
+      </li>
+      <li :class="{ hidden: !$store.state.isUserLogged }">
+        <router-link
+          :to="{ name: 'Login' }"
+          v-show="$store.state.isUserLogged"
+          @click="logOut"
+          >Logout</router-link
+        >
+      </li>
+      <li :class="{ hidden: $store.state.isUserLogged }">
+        <router-link :to="{ name: 'Login' }" v-show="!$store.state.isUserLogged"
+          >Login</router-link
+        >
+      </li>
+      <li :class="{ hidden: $store.state.isUserLogged }">
+        <router-link
+          :to="{ name: 'Register' }"
+          v-show="!$store.state.isUserLogged"
+          >Register</router-link
+        >
+      </li>
+    </ul>
+  </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
 
 <style>
 body {

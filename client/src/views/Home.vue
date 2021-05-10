@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="home">
     <h1>Home page</h1>
     <p v-if="$store.state.isUserLogged">
@@ -8,9 +9,11 @@
 </template>
 
 <script>
+import Navbar from "../components/Navbar";
 // @ is an alias to /src
 
 export default {
+  components: { Navbar },
   name: "Home",
 };
 </script>

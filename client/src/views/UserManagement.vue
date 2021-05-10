@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="home">
     <h1>Account Setting</h1>
 
@@ -9,13 +10,14 @@
 </template>
 
 <script>
+import Navbar from "../components/Navbar";
 import UserManagementCard from "../components/UserManagementCard";
 
 // @ is an alias to /src
 
 export default {
   name: "Home",
-  components: { UserManagementCard },
+  components: { Navbar, UserManagementCard },
 };
 </script>
 
