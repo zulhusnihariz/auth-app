@@ -91,4 +91,23 @@ module.exports = {
       });
     }
   },
+
+  async delete(req, res) {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({
+        where: {
+          email: email,
+        },
+      });
+
+      await user.destroy({ truncate: true });
+
+      res.send({ user: user.toJSON() });
+    } catch (err) {
+      res.status(500).send({
+        error: "An error has occured trying to log in",
+      });
+    }
+  },
 };

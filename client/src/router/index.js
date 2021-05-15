@@ -23,8 +23,13 @@ const routes = [
     component: Register,
   },
   {
-    path: "/account",
-    name: "UserManagement",
+    path: "/account/change",
+    name: "ChangePassword",
+    component: UserManagement,
+  },
+  {
+    path: "/account/delete",
+    name: "DeleteAccount",
     component: UserManagement,
   },
 

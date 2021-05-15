@@ -16,7 +16,7 @@ import UserManagementCard from "../components/UserManagementCard";
 // @ is an alias to /src
 
 export default {
-  name: "Home",
+  name: "UserManagement",
   components: { Navbar, UserManagementCard },
 };
 </script>

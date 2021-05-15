@@ -7,7 +7,7 @@
         :class="{ hidden: !$store.state.isUserLogged }"
       >
         <router-link
-          :to="{ name: 'UserManagement' }"
+          :to="{ name: 'ChangePassword' }"
           v-show="$store.state.isUserLogged"
           >Account</router-link
         >
@@ -51,6 +51,8 @@ export default {
 <style>
 body {
   background-color: hsl(235, 21%, 11%);
+  margin: 0;
+  padding: 0;
 }
 
 select::-ms-expand {

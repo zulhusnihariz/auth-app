@@ -8,9 +8,9 @@ export default {
     return Api().post("login", credentials);
   },
   change(credentials) {
-    return Api().post("account", credentials);
+    return Api().post("account/change", credentials);
   },
   delete(credentials) {
-    return Api().post("account", credentials);
+    return Api().post("account/delete", credentials);
   },
 };
